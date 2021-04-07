@@ -1,10 +1,10 @@
 CREATE INDEX student_index ON student USING btree (name, surname);
-CREATE INDEX student_index ON student USING hash (name, surname);
+CREATE INDEX student_index ON student USING hash (name); -- does not support multiple columns
 CREATE INDEX student_index ON student USING gin (name, surname);
 CREATE INDEX student_index ON student USING gist (name, surname);
 DROP INDEX student_index;
 
-INSERT INTO student (name, surname, dob, primary_skill, created_datetime)
+EXPLAIN ANALYSE INSERT INTO student (name, surname, dob, primary_skill, created_datetime)
 SELECT left(md5(i::text), 10),
        md5(random()::text),
        date((current_date - '15 years'::interval) +
