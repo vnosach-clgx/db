@@ -1,7 +1,8 @@
-CREATE INDEX name_index ON student USING btree (name, surname);
-CREATE INDEX name_index ON student USING hash (name, surname);
-CREATE INDEX name_index ON student USING gin (name, surname);
-CREATE INDEX name_index ON student USING gist (name, surname);
+CREATE INDEX student_index ON student USING btree (name, surname);
+CREATE INDEX student_index ON student USING hash (name, surname);
+CREATE INDEX student_index ON student USING gin (name, surname);
+CREATE INDEX student_index ON student USING gist (name, surname);
+DROP INDEX student_index;
 
 INSERT INTO student (name, surname, dob, primary_skill, created_datetime)
 SELECT left(md5(i::text), 10),
